@@ -27,6 +27,17 @@ public class Graph {
     private String coordString(int x, int y) {
     	return x+""+y;
     }
+    
+    /** Returns the node at coords (x, y), null if none */
+    public Node nodeAt(int x, int y) {
+    	String s = coordString(x, y);
+    	if (node_map.containsKey(s)) {
+    		Node n = node_map.get(s);
+    		if (n.getX() == x && n.getY() == y)
+    			return n;
+    	}
+    	return null;
+    }
 
     /** Add an array of nodes within bounds x: [0, width], y : [0, height] */
     public void addNodes(Node[] nodes, int width, int height) {
@@ -83,17 +94,14 @@ public class Graph {
     	for (Node n : nodes) {
     		for (int x = n.getX() - radius; x < n.getX() + radius; x++) {
     			for (int y = n.getY() - radius; y < n.getY() + radius; y++) {
-    				String s = coordString(x, y);
-    				if (node_map.containsKey(s)) {
-    					Node tmp = node_map.get(s);
-    					if (tmp.getX() == x && tmp.getY() == y && !tmp.equals(n)) {
-    						tempEdges.add(new Edge(n, node_map.get(s)));
+    				Node temp = nodeAt(x, y);
+    					if (temp != null && !temp.equals(n)) {
+    						tempEdges.add(new Edge(n, temp));
     		    			pairedNodes.add(n);
     					}
     				}
     			}
     		}
-    	}
     	
     	// All unpaired nodes make edges to all other nodes
     	for (int i = 0; i < nodes.size(); i++) {

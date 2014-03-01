@@ -16,15 +16,7 @@ public class Utils {
         return ps;
     }
     
-    /*
-     * http://stackoverflow.com/questions/2927391/whats-the-reason-i-cant-create-generic-array-types-in-java
-     * This bugs me
-     * 
-    public static <T> T[] arrayListtoArray(ArrayList<T> arr) {
-        T[] temp = new T[arr.size()];
-        int i=0;
-        for (T a : arr)
-            temp[i++] = 
+    public static int scaledPointSize(int num_points, int width, int height) {
+    	return (int) Math.min(GraphDisplay.MAX_RADIUS, Math.sqrt(0.5*width*height/num_points));
     }
-    */
 }
