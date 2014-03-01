@@ -165,15 +165,15 @@ public class Graph {
 
         // Generate edges for Graph
         if (getCombos()) {
-            System.out.println("Using combinations...");
+            System.out.println("Using all edge combinations...");
             genEdges();
         } else {
-            System.out.println("Using BFS...");
+            System.out.println("Using BFS to make edges...");
             genEdges2();
         }
         tempTime = System.currentTimeMillis() - startTime;
         totalTime += tempTime;
-        System.out.println("Finished generating "+edges.length+" edges: " + tempTime/1000.0 + " sec");
+        System.out.println("Generated "+edges.length+" edges: " + tempTime/1000.0 + " sec");
 
         // Generate the edge PriorityQueue
         PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
@@ -181,7 +181,7 @@ public class Graph {
             pq.add(e);
         tempTime = System.currentTimeMillis() - startTime - totalTime;
         totalTime += tempTime;
-        System.out.println("Finished PQ: " + tempTime/1000.0 + " sec");
+        System.out.println("Generated edge priority queue: " + tempTime/1000.0 + " sec");
 
         // Generate MST
         UnionFind<Node> uf = new UnionFind<Node>();

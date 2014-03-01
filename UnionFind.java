@@ -56,7 +56,8 @@ public class UnionFind<T> {
         }
     }
     
-    public class UFNode<T> implements Comparable {
+    @SuppressWarnings({ "rawtypes", "hiding" })
+	public class UFNode<T> implements Comparable {
         T data;
         UFNode<T> parent;
         int size;
@@ -73,7 +74,10 @@ public class UnionFind<T> {
             size = p.size;
         }
         
-        public int compareTo(Object o) {
+        @SuppressWarnings("unchecked")
+		public int compareTo(Object o) {
+        	if (! (o instanceof UFNode))
+        		return 0;
             UFNode<T> o_node = (UFNode<T>) o;
             int temp = size - o_node.size;
             if (temp != 0)
@@ -83,7 +87,7 @@ public class UnionFind<T> {
             else if (parent == null && o_node.parent != null)
                 return -1;
             else if (data instanceof Comparable)
-                return ((Comparable) data).compareTo(o_node.data);
+                return ((Comparable<T>) data).compareTo(o_node.data);
             else
                 return 1;
         }
