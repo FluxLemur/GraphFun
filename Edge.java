@@ -23,6 +23,11 @@ public class Edge implements Comparable<Object> {
         from.addEdge(this);
         to.addEdge(this);
     }
+    
+    /** Return whether this edge contains Node n*/
+    public boolean hasNode(Node n) {
+    	return n == from || n == to;
+    }
 
     public double getWeight() {
         return weight * getLength();

@@ -81,7 +81,7 @@ public class Graph {
     /** Determines whether all combinations, or BFS on points should be used to generate Edges */
     private boolean getCombos() {
         // If points are sparse, use combinations
-        return widthBound * heightBound > nodes.size() * nodes.size();
+        return widthBound / (double) nodes.size() > nodes.size() / (double) heightBound;
     }
 
     /** Generate all possible Edges in the Graph by local BFS on points */
@@ -120,7 +120,7 @@ public class Graph {
 
     // Checks if nodes a and b are connected using BFS
     public boolean nodesConnected(Node a, Node b) {
-        return nodesConnectedHelper(null, a, b);
+        return nodeConnectionHelper(null, a, b) != null;
     }
 
     private boolean nodesConnectedHelper(Node parent, Node from, Node to) {
@@ -131,6 +131,28 @@ public class Graph {
                 return true;
         }
         return false;
+    }
+    
+    /** Returns a list of Edges if there is a connection between from and to,
+     * otherwise null */
+    public Edge[] nodeConnectionHelper(Node parent, Node from, Node to) {
+    	if (from == to)
+    		return new Edge[0];
+    	
+    	for (Node n : from.adjNodes()) {
+    		if (n != parent) {
+        		Edge[] temp = nodeConnectionHelper(from, n, to);
+        		if (temp != null) {
+        			Edge[] ret = new Edge[temp.length + 1];
+        			ret[0] = from.edgeTo(n);
+        			for (int i = 0; i<temp.length; i++) {
+        				ret[i+1] = temp[i];
+        			}
+      				return ret;
+        		}
+    		}
+    	}
+    	return null;
     }
 
     /**

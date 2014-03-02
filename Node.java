@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * @author leo
  *
  */
-public class Node implements Comparable {
+public class Node implements Comparable<Object> {
     private int x;
     private int y;
     private ArrayList<Edge> edges;
@@ -64,6 +64,19 @@ public class Node implements Comparable {
     @Override
     public String toString() {
         return "Node("+getX()+", "+getY()+")";
+    }
+    
+    /**
+     * Get Edge object from this Node to other, null if none
+     * @param other
+     * @return
+     */
+    public Edge edgeTo(Node other) {
+    	for (Edge e : edges) {
+    		if (e.hasNode(other))
+    			return e;
+    	}
+    	return null;
     }
     
     /*
