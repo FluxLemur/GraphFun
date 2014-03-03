@@ -14,7 +14,7 @@ Enter the following commands to run the project:
 2. Click on two points after MST is generated to see path between them (right
 click removes path)
 
-3. Printed information above MST generation
+3. Printed information about MST generation
 
 ##Examples
 ![1k points](https://raw.github.com/FluxLemur/GraphFun/master/snapshots/graph3.png)
