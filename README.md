@@ -4,6 +4,7 @@ minimum spanning tree.
 
 Enter the following commands to run the project:
 1. *make*
+
 2. *make run*
 
 ## Features
