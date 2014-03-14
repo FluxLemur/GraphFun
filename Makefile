@@ -3,16 +3,17 @@
 # enter 'make run' to run it
 #
 JCC = javac
-
-JFLAGS = -g
+JVM = java
+DIR = src/
+JFLAGS = -cp $(DIR)
 
 default: GraphDisplay
 
-run: GraphDisplay.class
-	java GraphDisplay
+run: $(DIR)GraphDisplay.class
+	$(JVM) $(JFLAGS) GraphDisplay
 
-GraphDisplay: GraphDisplay.java
-	$(JCC) $(JFLAGS) GraphDisplay.java
+GraphDisplay: $(DIR)GraphDisplay.java
+	$(JCC) $(JFLAGS) $(DIR)GraphDisplay.java
 
 clean: 
-	$(RM) *.class
+	$(RM) $(DIR)*.class

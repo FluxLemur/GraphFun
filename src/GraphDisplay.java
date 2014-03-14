@@ -1,6 +1,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -235,7 +237,7 @@ public class GraphDisplay extends JFrame implements ActionListener, MouseListene
 		if (mousePress != null && !(e.getPoint().equals(mousePress))) {
 			//System.out.println("Transforming");
 			Graphics2D g = (Graphics2D) graphPanel.getGraphics();
-			//AffineTransform tr = g.getTransform();
+			AffineTransform tr = g.getTransform();
 			g.scale(e.getX()-mousePress.x, e.getY()-mousePress.y);
 			//g.setTransform(tr);
 			//graphPanel.repaint();
