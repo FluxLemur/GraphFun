@@ -15,5 +15,5 @@ run: $(DIR)GraphDisplay.class
 GraphDisplay: $(DIR)GraphDisplay.java
 	$(JCC) $(JFLAGS) $(DIR)GraphDisplay.java
 
-clean: 
+clean:
 	$(RM) $(DIR)*.class
