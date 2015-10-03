@@ -48,11 +48,11 @@ public class GraphDisplay extends JFrame implements ActionListener, MouseListene
         //create an options/generate nodes/make MST bar on bottom
         java.awt.Container contentPane = getContentPane();
         contentPane.add(graphPanel, BorderLayout.CENTER);
-        
+
         mousePos = new JLabel("(0,0)", JLabel.NORTH_EAST);
         graphPanel.add(mousePos, BorderLayout.EAST);
         graphPanel.addMouseListener(this);
-        graphPanel.addMouseMotionListener(new MouseMotionListener() {	
+        graphPanel.addMouseMotionListener(new MouseMotionListener() {
 			public void mouseMoved(MouseEvent e) {
 				mousePos.setText("("+e.getX()+","+e.getY()+")");
 			}
@@ -139,48 +139,48 @@ public class GraphDisplay extends JFrame implements ActionListener, MouseListene
             // Draw randomly generated nodes
             for (Node p : myGraph.getNodes())
                 drawPoint(g2, p.getX(), p.getY());
-            
+
             //Draw selected Nodes
 			g2.setColor(Color.blue);
             if (fromNode != null)
                 graphPanel.drawPoint(g2 , fromNode.getX(), fromNode.getY());
             if (toNode != null)
                 graphPanel.drawPoint(g2 , toNode.getX(), toNode.getY());
-            
+
             g2.setColor(POINT_COLOR);
-            
+
             g2.setStroke(new BasicStroke(2));
             //g2.setColor(Color.red);
             drawEdges(g2, myGraph.getEdges());
             g2.setStroke(new BasicStroke(3));
             g2.setColor(Color.blue);
             drawEdges(g2, path);
-            
+
             g2.setColor(POINT_COLOR);
             // Draw zoom box
             if (zoomBox != null)
             	g2.draw(zoomBox);
         }
-        
+
         public void drawPoint(Graphics2D g, int x, int y) {
         	g.fillOval(x-pRadius/2, y-pRadius/2, pRadius, pRadius);
         }
-        
+
         public void drawEdges(Graphics2D g, Edge[] edges) {
         	if (edges == null)
         		return;
         	for (Edge e : edges) {
                 if (e != null)
-                    g.drawLine(e.getFrom().getX(), e.getFrom().getY(), e.getTo().getX(), e.getTo().getY());
+                    g.drawLine(e.from.getX(), e.from.getY(), e.to.getX(), e.to.getY());
             }
         }
-        
+
         public void pathInfo() {
         	if (path == null || toNode == null || fromNode == null)
         		return;
         	double length = 0;
             for (Edge e : path) {
-            	length += e.getLength();
+            	length += e.length;
             }
             System.out.println("Direct path distance: "+Node.getDistance(fromNode, toNode));
             System.out.println("Distance on MST: " +length+"\n");

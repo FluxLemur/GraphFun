@@ -1,12 +1,10 @@
 /**
- * An Edge connects two Node objects. It has a length and potential weight (not implemented yet)
- * @author leo
- *
+ * An Edge connects two Node objects.
  */
 public class Edge implements Comparable<Object> {
-    private Node from;
-    private Node to;
-    private double length;
+    public final Node from;
+    public final Node to;
+    public final double length;
     private double weight;
 
     public Edge(Node f, Node t) {
@@ -17,33 +15,24 @@ public class Edge implements Comparable<Object> {
     }
 
     /**
-     * Lets the two nodes know that this Edge connects them
+     * Both Nodes point to this edge.
      */
     public void addNodes() {
         from.addEdge(this);
         to.addEdge(this);
     }
-    
-    /** Return whether this edge contains Node n*/
+
+    /** Whether this edge contains Node n*/
     public boolean hasNode(Node n) {
     	return n == from || n == to;
     }
 
-    public double getWeight() {
-        return weight * getLength();
-    }
-    public double getLength() {
-        return length;
-    }
-    public Node getTo() {
-        return to;
-    }
-    public Node getFrom() {
-        return from;
+    public double getWeightedLength() {
+        return weight * length;
     }
 
     public int compareTo(Object o) {
-        double cmp = getLength() - ((Edge) o).getLength();
+        double cmp = length - ((Edge) o).length;
         if (Math.abs(cmp) < 0.000000000001)
             return 0;
         if (cmp > 0)
