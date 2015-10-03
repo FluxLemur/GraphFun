@@ -16,24 +16,24 @@ public class Graph {
         reset();
     }
 
-    /** 
+    /**
      * Generate an array of edges that for an list of nodes
      * @param nodes
      */
     public Edge[] getEdges() {
         return edges;
     }
-    
+
     private String coordString(int x, int y) {
     	return x+""+y;
     }
-    
+
     /** Returns the node at coords (x, y), null if none */
     public Node nodeAt(int x, int y) {
     	String s = coordString(x, y);
     	if (node_map.containsKey(s)) {
     		Node n = node_map.get(s);
-    		if (n.getX() == x && n.getY() == y)
+    		if (n.x == x && n.y == y)
     			return n;
     	}
     	return null;
@@ -44,7 +44,7 @@ public class Graph {
         //this.nodes = new ArrayList<Node>(Arrays.asList(nodes));
         for (Node n : nodes) {
             this.nodes.add(n);
-            node_map.put(coordString(n.getX(), n.getY()), n);
+            node_map.put(coordString(n.x, n.y), n);
         }
         widthBound = width;
         heightBound = height;
@@ -89,11 +89,11 @@ public class Graph {
     	ArrayList<Edge> tempEdges = new ArrayList<Edge>();
     	Collection<Node> pairedNodes = new HashSet<Node>();
     	int radius = 2 * (int) Math.sqrt(widthBound * heightBound / nodes.size());
-    	
+
     	// Find all local edges by BFS
     	for (Node n : nodes) {
-    		for (int x = n.getX() - radius; x < n.getX() + radius; x++) {
-    			for (int y = n.getY() - radius; y < n.getY() + radius; y++) {
+    		for (int x = n.x - radius; x < n.x + radius; x++) {
+    			for (int y = n.y - radius; y < n.y + radius; y++) {
     				Node temp = nodeAt(x, y);
     					if (temp != null && !temp.equals(n)) {
     						tempEdges.add(new Edge(n, temp));
@@ -102,7 +102,7 @@ public class Graph {
     				}
     			}
     		}
-    	
+
     	// All unpaired nodes make edges to all other nodes
     	for (int i = 0; i < nodes.size(); i++) {
     		Node n = nodes.get(i);
@@ -112,8 +112,8 @@ public class Graph {
     			}
     		}
     	}
-    	
-    	
+
+
     	// ArrayList -> Array
     	edges = tempEdges.toArray(edges);
     }
@@ -132,13 +132,13 @@ public class Graph {
         }
         return false;
     }
-    
+
     /** Returns a list of Edges if there is a connection between from and to,
      * otherwise null */
     public Edge[] nodeConnectionHelper(Node parent, Node from, Node to) {
     	if (from == to)
     		return new Edge[0];
-    	
+
     	for (Node n : from.adjNodes()) {
     		if (n != parent) {
         		Edge[] temp = nodeConnectionHelper(from, n, to);
@@ -170,7 +170,7 @@ public class Graph {
         int i = 0;
 
         for (Edge e : edges) {
-            if (!nodesConnected(e.getFrom(), e.getTo())) {    // e does not create a cycle
+            if (!nodesConnected(e.from, e.to)) {    // e does not create a cycle
                 mst[i++] = e;
                 e.addNodes();
             }
@@ -225,10 +225,10 @@ public class Graph {
             e = pq.poll();
             if (e == null)
             	break;
-            if (uf.find(e.getFrom()) != uf.find(e.getTo())) {    // e does not create a cycle
+            if (uf.find(e.from) != uf.find(e.to)) {    // e does not create a cycle
                 mst[i++] = e;
                 e.addNodes();
-                uf.union(e.getFrom(), e.getTo());
+                uf.union(e.from, e.to);
             }
         }
         edges = mst;

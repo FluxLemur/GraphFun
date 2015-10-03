@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 
 /**
- * Represents a Point in a Cartesian Plane with integer coordinates
- * Each point has a list of Edge objects that can connect 
- * @author leo
- *
+ * A Node is a point in a Cartesian Plane with integer coordinates
+ * and has edges connecting it, comprising a Graph.
  */
 public class Node implements Comparable<Object> {
-    private int x;
-    private int y;
+    public final int x;
+    public final int y;
     private ArrayList<Edge> edges;
 
     /**
@@ -22,18 +20,10 @@ public class Node implements Comparable<Object> {
         edges = new ArrayList<Edge>();
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public static double getDistance(Node a, Node b) {
-        double d_x = a.getX() - b.getX();
+        double d_x = a.x - b.x;
         d_x *= d_x;
-        double d_y = a.getY() - b.getY();
+        double d_y = a.y - b.y;
         d_y *= d_y;
 
         return Math.sqrt(d_x + d_y);
@@ -63,9 +53,9 @@ public class Node implements Comparable<Object> {
 
     @Override
     public String toString() {
-        return "Node("+getX()+", "+getY()+")";
+        return "Node("+x+", "+y+")";
     }
-    
+
     /**
      * Get Edge object from this Node to other, null if none
      * @param other
@@ -78,7 +68,7 @@ public class Node implements Comparable<Object> {
     	}
     	return null;
     }
-    
+
     /*
     @Override
     public boolean equals(Object o) {
@@ -88,7 +78,7 @@ public class Node implements Comparable<Object> {
     	return super.equals(n) && n.x == x && n.y == y && n.edges.equals(edges);
     }
     */
-    
+
     /*
     @Override
     public int hashCode() {

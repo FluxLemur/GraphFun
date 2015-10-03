@@ -138,14 +138,14 @@ public class GraphDisplay extends JFrame implements ActionListener, MouseListene
 
             // Draw randomly generated nodes
             for (Node p : myGraph.getNodes())
-                drawPoint(g2, p.getX(), p.getY());
+                drawPoint(g2, p.x, p.y);
 
             //Draw selected Nodes
 			g2.setColor(Color.blue);
             if (fromNode != null)
-                graphPanel.drawPoint(g2 , fromNode.getX(), fromNode.getY());
+                graphPanel.drawPoint(g2 , fromNode.x, fromNode.y);
             if (toNode != null)
-                graphPanel.drawPoint(g2 , toNode.getX(), toNode.getY());
+                graphPanel.drawPoint(g2 , toNode.x, toNode.y);
 
             g2.setColor(POINT_COLOR);
 
@@ -171,7 +171,7 @@ public class GraphDisplay extends JFrame implements ActionListener, MouseListene
         		return;
         	for (Edge e : edges) {
                 if (e != null)
-                    g.drawLine(e.from.getX(), e.from.getY(), e.to.getX(), e.to.getY());
+                    g.drawLine(e.from.x, e.from.y, e.to.x, e.to.y);
             }
         }
 
