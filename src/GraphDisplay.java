@@ -16,7 +16,7 @@ public class GraphDisplay extends JFrame
   public static final int MAX_RADIUS = 8;
   public static final Color POINT_COLOR = Color.black;
 
-  private JButton genPoints, genMst;
+  private JButton genPoints, genMstFast, genMstSlow;
   private JTextField pointsField;
   private int numPoints;
   private JLabel mousePos;
@@ -80,10 +80,13 @@ public class GraphDisplay extends JFrame
 
     genPoints = new JButton("Generate " + numPoints + " random nodes");
     genPoints.addActionListener(this);
+    genMstSlow = new JButton("Slow minimum spanning tree (MST)");
+    genMstSlow.addActionListener(this);
+    genMstFast = new JButton("Fast MST");
+    genMstFast.addActionListener(this);
     bpanel.add(genPoints);
-    genMst = new JButton("Generate minimum spanning tree");
-    genMst.addActionListener(this);
-    bpanel.add(genMst);
+    bpanel.add(genMstSlow);
+    bpanel.add(genMstFast);
 
     contentPane.add(bpanel, BorderLayout.PAGE_END);
     setVisible(true);
@@ -101,9 +104,12 @@ public class GraphDisplay extends JFrame
       myGraph.addNodes(Utils.genPoints(numPoints, w, h), w, h);
       repaint();
     }
-    else if (e.getSource().equals(genMst)) {
-      //myGraph.genEdges2();
-      myGraph.genMST2();
+    else if (e.getSource().equals(genMstSlow)) {
+      myGraph.genMSTSlow();
+      repaint();
+    }
+    else if (e.getSource().equals(genMstFast)) {
+      myGraph.genMSTFast();
       repaint();
     }
     else if (e.getSource().equals(pointsField)) {
