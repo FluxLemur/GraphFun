@@ -78,7 +78,7 @@ public class GraphDisplay extends JFrame
     pointsField.addActionListener(this);
     bpanel.add(pointsField);
 
-    genPoints = new JButton("Generate " + numPoints + " random nodes");
+    genPoints = new JButton("Generate " + numPoints + " random points");
     genPoints.addActionListener(this);
     genMstSlow = new JButton("Slow minimum spanning tree (MST)");
     genMstSlow.addActionListener(this);
