@@ -73,29 +73,6 @@ public class Node implements Comparable<Object> {
     return null;
   }
 
-  /*
-     @Override
-     public boolean equals(Object o) {
-     if (! (o instanceof Node))
-     return false;
-     Node n = (Node) o;
-     return super.equals(n) && n.x == x && n.y == y && n.edges.equals(edges);
-     }
-     */
-
-  /*
-     @Override
-     public int hashCode() {
-     int prime = 31;
-     int result = 1;
-     result += prime * super.hashCode();
-     result += prime * Math.abs(x);
-     result += prime * Math.abs(y);
-     result += prime * edges.hashCode();
-     return result;
-     }
-     */
-
   public int compareTo(Object o) {
     assert o instanceof Node;
     Node temp = (Node) o;

@@ -168,7 +168,7 @@ public class Graph {
     final long startTime = System.currentTimeMillis();
     long totalTime = 0;
     long tempTime = 0;
-    System.out.println("Connecting "+nodes.size()+" nodes sub-optimally");
+    System.out.println("Connecting "+nodes.size()+" nodes optimally");
 
     genComboEdges();
     tempTime = System.currentTimeMillis() - startTime - totalTime;
