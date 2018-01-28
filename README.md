@@ -16,6 +16,6 @@ click removes path)
 
 3. Printed information about MST generation
 
-##Examples
+## Examples
 ![1k points](https://raw.github.com/FluxLemur/GraphFun/master/snapshots/graph3.png)
 ![100k points](https://raw.github.com/FluxLemur/GraphFun/master/snapshots/graph4.png)
